@@ -1,0 +1,85 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 425,
+    "height": 300,
+    "background": "floralwhite",
+
+    "padding": {"left": 5, "right": 5, "top": 0, "bottom": 0},
+    "autosize": "none",
+    "signals": [
+      {"name": "cx", "update": "width / 2"},
+      {"name": "cy", "update": "height / 2"},
+      {
+        "name": "gravityX",
+        "value": 0.22,
+        "bind": {"input": "range", "min": 0, "max": 1}
+      },
+      {
+        "name": "gravityY",
+        "value": 0.46,
+        "bind": {"input": "range", "min": 0, "max": 1}
+      }
+    ],
+    "data": [
+      {
+        "name": "nutrients",
+        "values": [
+          {"nutrient": "Protein", "amount": 15.4},
+          {"nutrient": "Carbohydrate", "amount": 43.6},
+          {"nutrient": "Total fat", "amount": 39.1},
+          {"nutrient": "Dietary fibre", "amount": 1.9}
+        ]
+      }
+    ],
+    "scales": [
+      {
+        "name": "size",
+        "domain": {"data": "nutrients", "field": "amount"},
+        "range": [10, 800] 
+      },
+      {
+        "name": "color",
+        "type": "ordinal",
+        "domain": {"data": "nutrients", "field": "nutrient"},
+        "range": "category"
+      }
+    ],
+    "marks": [
+      {
+        "name": "bubbles",
+        "type": "symbol",
+        "from": {"data": "nutrients"},
+        "encode": {
+          "enter": {
+            "fill": {"scale": "color", "field": "nutrient"},
+            "xfocus": {"signal": "cx"},
+            "yfocus": {"signal": "cy"}
+          },
+          "update": {
+            "size": {"signal": "pow(datum.amount, 2)", "scale": "size"}, 
+            "stroke": {"value": "white"},
+            "strokeWidth": {"value": 1},
+            "tooltip": {"signal": "datum.nutrient + ': ' + datum.amount"}
+          }
+        },
+        "transform": [
+          {
+            "type": "force",
+            "iterations": 100,
+            "static": false,
+            "forces": [
+              {
+                "force": "collide",
+                "iterations": 2,
+                "radius": {"expr": "sqrt(datum.size) / 2"}
+              },
+              {"force": "center", "x": {"signal": "cx"}, "y": {"signal": "cy"}},
+              {"force": "x", "x": "xfocus", "strength": {"signal": "gravityX"}},
+              {"force": "y", "y": "yfocus", "strength": {"signal": "gravityY"}}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

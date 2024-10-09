@@ -1,0 +1,144 @@
+#symbol_map {
+    max-width: 2500px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: floralwhite;
+    box-shadow: 0px 0px 3px rgba(150, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-top: 20px;
+}
+#Donut_Chart {
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color:floralwhite;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-top: 20px;
+}
+#bar_chart {
+    max-width: 15S00px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: floralwhite;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-top: 20px;
+}
+#emoji_chart{
+    max-width: 15S00px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: floralwhite;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-top: 20px;
+}
+#Tree_map{
+    max-width: 15S00px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: floralwhite;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-top: 20px;
+}
+.pure-g {
+    margin-bottom: 40px;
+}
+
+.vega-title {
+    font-family: Arial;
+    font-size: 24px;
+    color: blue;
+}
+
+.header img {
+
+    float: left;
+    width: 300px;
+    height: 200px;
+}
+
+.header h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 55px;
+    font-weight: bold;
+    color: #09130d; /* Dark green */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.header h2 {
+    font-family: 'Open Sans', sans-serif;
+
+    font-size: 28px;
+    font-weight: normal;
+    color: #888282; /* Steel blue */
+    text-align: center;
+    margin-top: 0;
+}
+.header h3 {
+    font-size: 35px;
+    font-weight: normal;
+    color: #888282; /* Steel blue */
+    text-align: center;
+    margin-top: 0;
+}
+
+body * {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background-color: lightgray;
+}
+.red1{
+    color: rgba(252, 4, 4, 0.497);
+}
+
+.page {
+    width: 900px;
+    background-color: rgb(182, 211, 199);
+    margin: auto;
+    padding: 50px;
+    padding-top: 35px;
+    border-radius: 15px; /* Optional: Adds rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for a floating effect */
+}
+.container {
+    display: flex; /* Creates a flex container */
+    align-items: center; /* Vertically centers items */
+  }
+
+  .text-block {
+    font-family: 'Open Sans', sans-serif;
+
+    margin-left: 20px; /* Adds space between the image and text */
+    line-height: 1.5; /* Adjusts line spacing */
+    font-size: 16px; /* Sets font size */
+    color: #333; /* Sets text color */
+    text-align: center; /* Aligns text to the center */
+
+  }
+  .text-block2 {
+    font-family: 'Open Sans', sans-serif;
+
+    margin-left: 7px; /* Adds space between the image and text */
+    line-height: 1.5; /* Adjusts line spacing */
+    font-size: 14px; /* Sets font size */
+    color: #333; /* Sets text color */
+    text-align: center; /* Aligns text to the center */
+}
+
+
+  img {
+    width: 350px; /* Sets image width, adjust as needed */
+    height: auto; /* Maintains aspect ratio */
+  }
+  hr {
+    border: none; /* Removes the default border */
+    height: 2px; /* Sets the height of the line */
+    background-color: rgb(0, 0, 0); /* Sets the line color to white */
+    margin: 10px 0; /* Adds spacing above and below the line */
+  }

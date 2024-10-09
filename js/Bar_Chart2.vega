@@ -1,0 +1,51 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "config": {"view": {"stroke": ""}},
+    "width": 250,
+    "height": 200,
+    "background": "floralwhite",
+
+    "data": {
+        "url": "https://raw.githubusercontent.com/denishan99/Assignment2/refs/heads/main/Major%20food%20Consumption.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+        {"calculate": "substring(datum['Major food group'], 0, 4)", "as": "year"},
+        {"fold": [
+          "Cereals and cereal products (g)",
+          "Fruit products (g)",
+          "Meat and poultry products (g)",
+          "Milk products (g)",
+          "Vegetable products (g)",
+          "Other(b) (g)"
+        ], "as": ["food_group", "amount"]},
+        {
+          "calculate": "{'Non-alcoholic beverages (g)': '🥤', 'Cereals and cereal products (g)': '🌾', 'Fruit products (g)': '🍏', 'Meat and poultry products (g)': '🍗', 'Milk products (g)': '🥛', 'Vegetable products (g)': '🥦', 'Other(b) (g)': '🍽️'}[datum.food_group]",
+          "as": "emoji"
+        },
+        {"filter": "datum.year == yearSelection"}
+
+
+      ],
+    "params": [
+      {
+        "name": "yearSelection",
+        "value": 2018,
+        "bind": {
+          "input": "range",
+          "min": 2018,
+          "max": 2022,
+          "step": 1,
+          "name": "Select Year: "
+        }
+      }
+    ],
+    "mark": {"type": "text", "baseline": "middle"},
+    "encoding": {
+      "x": {"field": "amount", "type": "quantitative", "axis": {"title": "Amount (g)"}},
+      "y": {"field": "food_group", "type": "nominal", "axis": {"title": "Food Group"}},
+      "text": {"field": "emoji", "type": "nominal"},
+      "size": {"value":40}
+    }
+  }
+  

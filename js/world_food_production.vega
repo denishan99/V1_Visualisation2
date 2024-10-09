@@ -1,0 +1,279 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Food Production by Country",
+  "width": 775,
+  "height": 500,
+  "background": "floralwhite",
+
+  "projection": {
+    "type": "equirectangular",
+    "center": {"expr": "center_to"},
+    "scale": {
+      "expr": "if(center_to[0] == 0 && center_to[1] == 0, zoom_level, if(zoom_level == 150, 350, zoom_level))"
+    }  },
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2021,
+      "bind": {
+        "input": "range",
+        "min": 2010,
+        "max": 2021,
+        "step": 1,
+        "name": "Year: "
+      }
+    },
+    {
+      "name": "zoom_level",
+      "value": 150,
+      "bind": {
+        "input": "range",
+        "min": 150,
+        "max": 500,
+        "step": 10,
+        "name": "Zoom Level: "
+      }
+    },
+    {
+      "name": "center_to",
+      "value": [0, 0],
+      "bind": {
+        "input": "select",
+        "options": [
+          [20, 0],
+          [100, 40],
+          [-100, 40],
+          [-60, -30],
+          [10, 50],
+          [140, -25],
+          [0, -90],
+          [0,0]
+        ],
+        "labels": [
+          "Africa",
+          "Asia",
+          "North America",
+          "South America",
+          "Europe",
+          "Australia",
+          "Antarctica",
+          "ALL"
+        ],
+        "name": "Map Centre: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+        "format": {"type": "topojson", "feature": "oceans"}
+      },
+      "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/denishan99/Week9HW/refs/heads/main/js/ne_110m%20(2).json",
+        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/denishan99/Week9HW/refs/heads/main/js/ne_110m%20(2).json",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "'Data is not available in ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ddd",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "tooltip": {
+          "field": "note"
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/denishan99/Week9HW/refs/heads/main/world%20food%20production.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+        {
+          "filter": "datum.Year == Year_selection"
+        },
+        {
+          "calculate": "datum.Entity == 'America' ? 'United States of America' : datum.Entity == 'Central African Republic' ? 'Central African Rep.' : datum.Entity == 'South Sudan' ? 'S. Sudan' : datum.Entity == 'Democratic Republic of Congo' ? 'Dem. Rep. Congo' : datum.Entity",
+          "as": "standardized_name"
+        },
+        {
+          "lookup": "standardized_name", 
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/denishan99/Week9HW/refs/heads/main/js/ne_110m%20(2).json",
+              "format": {
+                "type": "topojson",
+                "feature": "ne_110m_admin_0_countries"
+              }
+            },
+            "key": "properties.NAME"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#fff",
+        "strokeWidth": 0.1
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "Total Production (Tonnes)",
+          "type": "quantitative",
+          "title": "Total Production",
+          "scale": {
+            "domain": [0, 2000000000],
+            "scheme": "greens"
+          },
+          "legend": {
+            "format": ".2s"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "standardized_name",  
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "Total Production (Tonnes)",
+            "type": "quantitative",
+            "title": "",
+            "format": ",.1f"
+          },
+          {
+            "field": "Year",
+            "type": "quantitative",
+            "title": "Year"
+          }
+        ]
+      }
+    },
+    {
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/denishan99/Week9HW/refs/heads/main/world%20food%20production.csv",
+            "format": {"type": "csv"}
+          },
+          "transform": [
+            {
+              "filter": "datum.Year == Year_selection"
+            },
+            {
+              "calculate": "datum.Entity == 'America' ? 'United States of America' : datum.Entity == 'Central African Republic' ? 'Central African Rep.' : datum.Entity == 'South Sudan' ? 'S. Sudan' : datum.Entity == 'Democratic Republic of Congo' ? 'Dem. Rep. Congo' : datum.Entity",
+              "as": "standardized_name"
+            },
+            {
+              "lookup": "standardized_name",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/denishan99/Week9HW/refs/heads/main/js/ne_110m%20(2).json",
+                  "format": {
+                    "type": "topojson",
+                    "feature": "ne_110m_admin_0_countries"
+                  }
+                },
+                "key": "properties.NAME"
+              },
+              "as": "geo"
+            },
+            {
+              "calculate": "parseFloat(datum['Total Production (Tonnes)'])",
+              "as": "total_production_num"
+            },
+            {
+              "joinaggregate": [
+                {
+                  "op": "max",
+                  "field": "total_production_num",
+                  "as": "max_production"
+                }
+              ]
+            },
+            {
+              "filter": "datum.total_production_num == datum.max_production"
+            },
+            {
+              "calculate": "datum.standardized_name == 'Argentina' ? {'lat': -38.4161, 'lon': -63.6167} : {'lat': 40.0690, 'lon': 45.0382}",
+              "as": "coordinates"
+            }
+          ],
+          "layer": [
+            {
+              "mark": {
+                "type": "point",
+                "size": 100,
+                "shape": "M0,.5L.6,.8L.5,.1L1,-.3L.3,-.4L0,-1L-.3,-.4L-1,-.3L-.5,.1L-.6,.8L0,.5Z",
+                "color": "Black",
+                "strokeWidth": 2,
+                "stroke": "black",
+                "opacity": 2
+              },
+              "encoding": {
+                "longitude": {"field": "coordinates.lon"},
+                "latitude": {"field": "coordinates.lat"},
+                "tooltip": [
+                  {"field": "standardized_name", "title": "Standardized Name"},
+                  {"field": "Total Production (Tonnes)", "title": "Food Production Amount(Tonnes)"}
+                ]              
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 10,  
+                "dy": -10, 
+                "fontStyle": "italic",
+                "fontSize": 12,
+                "color": "black"
+              },
+              "encoding": {
+                "longitude": {"field": "coordinates.lon"},
+                "latitude": {"field": "coordinates.lat"},
+                "text": {"value": "Max Food Production Country"}
+              }
+            }
+          ]
+        }
+      ]
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  ]
+}

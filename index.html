@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  
+  <title>Vega-Lite Chart</title>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  
+</head>
+<body>
+    <div class="page">
+            <div class="pure-u-1">
+                <div class="header">
+                    <h1>World Food Dynamics</h1>
+                    <h2>Global Insights and Australia's Role</h2>
+                    <hr>
+
+
+                </div>
+        </div>
+
+        <div class="container">
+            <img src="Img/logo.png" alt="logo" />
+            <p class="text-block">
+              This dashboard provides a comprehensive overview of <span class ='red1'>global  <br>
+              food production trends </span>, illustrating the dynamics and variations<br>
+              across different countries. It emphasizes  <span class ='red1'>Australia’s vital role</span><br>
+              in the agricultural sector, showcasing its contributions to<br>
+              the global food supply and production. Users can explore<br>
+              data across multiple years to understand trends and impacts.
+            </p>
+          </div>
+        
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <div id="symbol_map"></div>
+            </div>
+        </div>
+        <div class="pure-u-1">
+            <div class="header">
+                <hr>
+                <h3>Australia's Food Production</h3>
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <div id="Donut_Chart"></div>
+            </div>
+        </div>
+        <div class="pure-u-1">
+            <div class="header">
+                <hr>
+                <h3>Australia's Food Consumption</h3>
+            </div>
+        </div>
+
+        
+        <div class="pure-g">
+            <div class="pure-u-1-2"> <!-- Left side for text -->
+                <p class="text-block2">
+                    <br>
+                    <br>
+                    Insights into Australia’s food consumption trends.<br>
+                    It highlights key changes over recent years, including declines<br>
+                    in legumes, fruit, and vegetables. Despite these drops,<br>
+                    dairy substitutes and snack foods have shown growth. <span class ='red1'>Users<br>
+                    can explore data from 2018-19 to 2022-23 </span>to understand<br>
+                    how eating habits have evolved. 
+                </p>
+            </div>
+            <div class="pure-u-1-2"> <!-- Right side for chart -->
+                <div id="emoji_chart"></div>
+            </div>
+        </div>
+        <div class="pure-g">
+            <div class="pure-u-1-2"> <!-- Right side for chart -->
+                <div id="Tree_map"></div>
+            </div>
+            <div class="pure-u-1-2"> <!-- Left side for text -->
+                <p class="text-block2">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                    Australia's nutrient consumption data for the year <span class ='red1'>2022-2023.</span><br>
+                    This chart presents information on protein, carbohydrates,<br>
+                    total fat, and dietary fiber levels consumed.<br>
+                    Analyzing these nutrients helps understand dietary habits <br>
+                    and offers insights for improving public health.<br>
+                </p>
+            </div>
+
+        </div>
+
+        
+
+
+
+    </div>
+
+
+
+
+
+
+    </div>
+    <script type="text/javascript">
+
+    var spec2 = "js/world_food_production.vega";
+    vegaEmbed('#symbol_map', spec2).then(function(result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    var spec2 = "js/Donut_Chart.vega";
+    vegaEmbed('#Donut_Chart', spec2).then(function(result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    var spec3 = "js/bar_chart.vega";
+    vegaEmbed('#bar_chart', spec3).then(function(result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+    var spec4 = "js/Chord Diagram.vega";
+    vegaEmbed('#Chord_diagram', spec4).then(function(result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+    var spec5 = "js/Bar_Chart2.vega";
+    vegaEmbed('#emoji_chart', spec5).then(function(result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    var spec6 = "js/Tree_map.vega";
+    vegaEmbed('#Tree_map', spec6).then(function(result) {
+        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+    </script>
+    
+
+</body>
+</html>
