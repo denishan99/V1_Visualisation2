@@ -252,7 +252,7 @@
                 "dy": -10, 
                 "fontStyle": "italic",
                 "fontSize": 12,
-                "color": "black"
+                "color": "red"
               },
               "encoding": {
                 "longitude": {"field": "coordinates.lon"},
